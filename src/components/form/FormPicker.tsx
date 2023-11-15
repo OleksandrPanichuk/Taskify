@@ -80,7 +80,7 @@ export const FormPicker = ({
               id={id}
               name={id}
               className="hidden"
-              defaultChecked={selectedImageId === image.id}
+              checked={selectedImageId === image.id}
               disabled={pending}
               value={`${image.id}|${image.urls.thumb}|${image.urls.full}|${image.links.html}|${image.user.name}`}
             />
