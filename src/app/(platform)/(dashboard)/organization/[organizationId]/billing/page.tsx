@@ -6,14 +6,14 @@ import {SubscriptionButton} from './_components'
 import { Info } from "../_components";
 
 const BillingPage = async () => {
-  const isPro = await checkSubscription();
+  // const isPro = await checkSubscription();
 
   return (
     <div className="w-full">
-      <Info isPro={isPro} />
+      <Info isPro={true} />
       <Separator className="my-2" />
       <SubscriptionButton
-        isPro={isPro}
+        isPro={true}
       />
     </div>
   );
