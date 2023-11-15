@@ -3,6 +3,8 @@ import { checkSubscription } from '@/lib'
 import { Suspense } from 'react'
 import { BoardList, Info } from './_components'
 
+export const runtime = 'edge'
+
 export default async function OrganizationIdPage() {
 	const isPro = await checkSubscription()
 	return (
