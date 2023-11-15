@@ -10,10 +10,10 @@ const BillingPage = async () => {
 
   return (
     <div className="w-full">
-      <Info isPro={true} />
+      <Info isPro={false} />
       <Separator className="my-2" />
       <SubscriptionButton
-        isPro={true}
+        isPro={false}
       />
     </div>
   );

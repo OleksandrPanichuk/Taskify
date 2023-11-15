@@ -8,11 +8,11 @@ import { ActivityList } from "./_components";
 import { checkSubscription } from "@/lib/subscription";
 
 const ActivityPage = async () => {
-  const isPro = await checkSubscription();
+  
 
   return (
     <div className="w-full">
-      <Info isPro={isPro} />
+      <Info isPro={false} />
       <Separator className="my-2" />
       <Suspense fallback={<ActivityList.Skeleton />}>
         <ActivityList />

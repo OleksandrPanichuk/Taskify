@@ -8,9 +8,10 @@ import { Hint } from "@/components";
 import { Skeleton } from "@/components/ui";
 import { FormPopover } from "@/components/form";
 import { MAX_FREE_BOARDS } from "@/constants/boards";
-import { checkSubscription, getAvailableCount } from "@/lib"
+import {  getAvailableCount } from "@/lib"
 
-export const BoardList = async () => {
+
+export const BoardList = async ({isPro}:{isPro:boolean}) => {
   const { orgId } = auth();
 
   if (!orgId) {
@@ -27,7 +28,6 @@ export const BoardList = async () => {
   });
 
   const availableCount = await getAvailableCount();
-  const isPro = await checkSubscription();
 
   return (
     <div className="space-y-4">
