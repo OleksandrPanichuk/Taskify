@@ -8,6 +8,7 @@ export async function GET(
   { params }: { params: { cardId: string } }
 ) {
   try {
+    if(params.cardId === 'undefined') return new NextResponse("Invalid card id")
     const { userId, orgId } = auth();
 
     if (!userId || !orgId) {
