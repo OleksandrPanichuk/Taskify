@@ -29,6 +29,7 @@ export const CardModal = () => {
     queryFn: () => fetcher(`/api/cards/${id}/logs`),
     enabled:!!id
   });
+  
   if(!id) return null
 
   return (

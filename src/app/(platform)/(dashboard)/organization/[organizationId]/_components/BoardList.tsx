@@ -26,7 +26,8 @@ export const BoardList = async () => {
     }
   });
 
-  const isPro = true
+  const availableCount = await getAvailableCount();
+  const isPro = await checkSubscription();
 
   return (
     <div className="space-y-4">
@@ -55,7 +56,7 @@ export const BoardList = async () => {
           >
             <p className="text-sm">Create new board</p>
             <span className="text-xs">
-              {"Unlimited"}
+              {isPro ? "Unlimited" : `${MAX_FREE_BOARDS - availableCount} remaining`}
             </span>
             <Hint
               sideOffset={40}
