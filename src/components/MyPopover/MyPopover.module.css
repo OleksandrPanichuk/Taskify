@@ -1,0 +1,33 @@
+.wrapper {
+  @apply flex flex-col;
+}
+
+
+.input__wrapper {
+  @apply bg-zinc-50 h-12  rounded-3xl flex items-center gap-x-2 px-4;
+}
+
+.input {
+  @apply outline-none focus:outline-none h-full w-full bg-transparent;
+}
+
+
+.content {
+  @apply absolute  z-[9999]    ;
+  
+}
+.content__inner {
+    
+    @apply bg-white rounded-xl shadow-lg my-4 p-3 overflow-auto relative  transition-all;
+    animation: content ease-in-out .2s forwards;
+
+  }
+
+@keyframes content {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}

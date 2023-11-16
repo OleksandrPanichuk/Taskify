@@ -78,3 +78,16 @@ body,
 		@apply bg-background text-foreground;
 	}
 }
+
+.description-editor, 
+.description-editor-output {
+	@apply bg-neutral-200 py-3 rounded-md;
+	> div {
+		background-color: rgb(229, 229, 229) !important;
+	}
+}
+
+
+.mantine-y68mcm ._isEmpty_nstdf_297 ._inlineContent_nstdf_297:before, .mantine-y68mcm ._isFilter_nstdf_298 ._inlineContent_nstdf_297:before {
+	@apply text-zinc-500;	
+}
