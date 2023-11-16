@@ -144,7 +144,7 @@ export const PopoverContent = forwardRef(function PopoverContent(
 	)
 })
 
-export const PopoverClose = forwardRef(function PopoverClose({asChild, ...props}:IPopoverCloseProps, ref:ForwardedRef<HTMLElement>) {
+export const PopoverClose = forwardRef(function PopoverClose({asChild, ...props}:IPopoverCloseProps, ref: ForwardedRef<HTMLButtonElement>) {
 	
 		const {onClose} = usePopover()
 		const Comp = asChild ? Slot : "button"
