@@ -144,16 +144,19 @@ export const PopoverContent = forwardRef(function PopoverContent(
 	)
 })
 
-export const PopoverClose = ({asChild, ...props}:IPopoverCloseProps) => {
-    const {onClose} = usePopover()
-    const Comp = asChild ? Slot : "button"
-    return (
-      <Comp
-        {...props}
-        onClick={(event) => {
-            props.onClick?.(event)
-            onClose()
-        }}
-      />
-    )
-}
+export const PopoverClose = forwardRef(function PopoverClose({asChild, ...props}:IPopoverCloseProps, ref:ForwardedRef<HTMLElement>) {
+	
+		const {onClose} = usePopover()
+		const Comp = asChild ? Slot : "button"
+		return (
+		  <Comp
+			{...props}
+			onClick={(event) => {
+				props.onClick?.(event)
+				onClose()
+			}}
+			ref={ref}
+		  />
+		)
+	
+})
