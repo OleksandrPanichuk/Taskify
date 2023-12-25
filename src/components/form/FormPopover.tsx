@@ -1,29 +1,35 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { ElementRef, useRef } from 'react'
 import { toast } from 'sonner'
-import { X } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 
-import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@/components/MyPopover'
-import { Button } from '@/components/ui'
 import { createBoard } from '@/actions/create-board'
-import { useProModal, useAction } from '@/hooks'
-
 import { FormInput, FormPicker, FormSubmit } from '@/components/form'
+import {
+	Button,
+	Popover,
+	PopoverClose,
+	PopoverContent,
+	PopoverTrigger,
+	TypePopoverAutoPosition
+} from '@/components/ui'
+import { useAction, useProModal } from '@/hooks'
+import { X } from 'lucide-react'
+import { cn } from '@/lib'
 
 interface FormPopoverProps {
 	children: React.ReactNode
 	side?: 'left' | 'right' | 'top' | 'bottom'
-	align?: 'start' | 'center' | 'end'
-	sideOffset?: number
+	autoPosition?: TypePopoverAutoPosition
+	contentClassName?: string
 }
 
 export const FormPopover = ({
 	children,
 	side = 'bottom',
-	align,
-	sideOffset = 0
+	autoPosition,
+	contentClassName
 }: FormPopoverProps) => {
 	const proModal = useProModal()
 	const router = useRouter()
@@ -49,9 +55,9 @@ export const FormPopover = ({
 	}
 
 	return (
-		<Popover>
+		<Popover side={side} autoPosition={autoPosition}>
 			<PopoverTrigger>{children}</PopoverTrigger>
-			<PopoverContent className="w-80 pt-3 md:m-0 m-2">
+			<PopoverContent className={cn('w-80   mx-2', contentClassName)}>
 				<div className="text-sm font-medium text-center text-neutral-600 pb-4">
 					Create board
 				</div>

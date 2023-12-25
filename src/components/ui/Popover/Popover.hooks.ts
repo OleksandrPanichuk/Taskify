@@ -4,7 +4,7 @@ type ListenerEvent = MouseEvent & {
 	target: Element
 }
 
-export const usePopoverClickOutside = (
+export const useClickOutside = (
 	ref: RefObject<HTMLElement>,
 	contentRef: RefObject<HTMLElement>,
 	callback: (event: MouseEvent) => void

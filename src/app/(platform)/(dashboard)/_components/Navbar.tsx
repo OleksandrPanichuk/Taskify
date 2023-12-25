@@ -16,7 +16,7 @@ export const Navbar = () => {
         <div className="hidden md:flex">
           <Logo />
         </div>
-        <FormPopover align="start" side="bottom" sideOffset={18}>
+        <FormPopover  side="bottom">
           <Button variant="primary" size="sm" className="rounded-sm hidden md:block h-auto  py-1.5 px-2">
             Create
           </Button>

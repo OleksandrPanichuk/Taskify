@@ -30,16 +30,14 @@ export const BoardOptions = ({ id }: BoardOptionsProps) => {
   };
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
+    <Popover side="bottom" >
+      <PopoverTrigger>
         <Button className="h-auto w-auto p-2" variant="transparent">
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
       <PopoverContent 
         className=" pt-3 pb-3 mx-2" 
-        side="bottom" 
-        align="start"
       >
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
           Board actions

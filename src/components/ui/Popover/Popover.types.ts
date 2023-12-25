@@ -2,8 +2,13 @@ import {
 	HTMLAttributes,
 	InputHTMLAttributes,
 	MutableRefObject,
+	ReactNode,
 	RefObject
 } from 'react'
+
+
+export type TypePopoverSide = 'left' | 'right' | 'top' | 'bottom'
+export type TypePopoverTrigger = HTMLDivElement | HTMLLabelElement | null
 
 export interface IPopoverContext {
 	isOpen: boolean
@@ -14,16 +19,21 @@ export interface IPopoverContext {
 	ref: MutableRefObject<HTMLDivElement | null>
 	canOpen?: boolean
 	contentRef: RefObject<HTMLDivElement | null>
-	triggerRef: RefObject<HTMLDivElement | HTMLLabelElement | null>
+	triggerRef: RefObject<TypePopoverTrigger>
+	
 }
 
+export type TypePopoverAutoPosition = 'same-axis' | 'any-axis'
+
 export interface IPopoverProps {
-	toggleMode?: boolean
-	className?: string
-	canOpen?: boolean
-	onOpenChange?: (isOpen: boolean) => void
-	defaultOpen?: boolean
-	
+	toggleMode: boolean
+	className: string
+	canOpen: boolean
+	onOpenChange: (isOpen: boolean) => void
+	defaultOpen: boolean
+	side:TypePopoverSide
+	autoPosition: TypePopoverAutoPosition
+	inheritWidth:boolean
 }
 
 export interface IPopoverInputProps
@@ -35,8 +45,7 @@ export interface IPopoverInputProps
 
 // @ts-ignore
 export interface IPopoverTriggerProps extends HTMLAttributes<HTMLDivElement> {
-	children: ((triggerFunction: () => void) => JSX.Element) | JSX.Element | React.ReactNode
-	asChild?:boolean
+	children: ((triggerFunction: () => void) => JSX.Element) | JSX.Element | ReactNode
 }
 
 

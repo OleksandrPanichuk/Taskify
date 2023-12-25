@@ -9,19 +9,21 @@ import {
 	useEffect,
 	useRef
 } from 'react'
-import { Slot } from "@radix-ui/react-slot"
 import { cn, mergeRefs } from '@/lib'
 
-import styles from './MyPopover.module.css'
+import styles from './Popover.module.scss'
 import {
-    IPopoverCloseProps,
+	IPopoverCloseProps,
 	type IPopoverContext,
 	type IPopoverInputProps,
 	type IPopoverProps,
 	type IPopoverTriggerProps
-} from './MyPopover.types'
+} from '@/components/ui/Popover/Popover.types'
 import { createPortal } from 'react-dom'
-import { usePopoverClickOutside, useDisclosure } from './MyPopover.hooks'
+import { useClickOutside, useDisclosure } from './Popover.hooks'
+import { Slot } from '@radix-ui/react-slot'
+import { PopoverPositioner } from './Popover.helpers'
+import { usePathname } from 'next/navigation'
 
 const PopoverContext = createContext<IPopoverContext>({} as IPopoverContext)
 const usePopover = () => useContext(PopoverContext)
@@ -33,38 +35,41 @@ export const Popover = ({
 	canOpen,
 	onOpenChange,
 	defaultOpen,
-}: PropsWithChildren<IPopoverProps>) => {
+	side ='bottom',
+	autoPosition,
+	inheritWidth
+}: PropsWithChildren<Partial<IPopoverProps>>) => {
 	const { isOpen, onOpen, onClose, onToggle } = useDisclosure(defaultOpen)
 	const ref = useRef<HTMLDivElement>(null)
 	const contentRef = useRef<HTMLDivElement>(null)
 	const triggerRef = useRef<HTMLDivElement | HTMLLabelElement | null>(null)
 
-	usePopoverClickOutside(ref, contentRef, onClose)
+	const pathname = usePathname()
+
+	useClickOutside(ref, contentRef, onClose)
 
 	useEffect(() => {
 		onOpenChange?.(isOpen)
-	}, [isOpen])
+	}, [isOpen, onOpenChange])
+
+	useEffect(() => {
+		onClose()
+	}, [pathname])
 
 	useEffect(() => {
 		if (!isOpen) return
+		if (typeof canOpen === 'boolean' && !canOpen) return
 
 		const trigger = triggerRef.current
 		const content = contentRef.current
 
-		
-
 		if (trigger && content) {
-			const triggerPosition = trigger.getBoundingClientRect()
+			const popover = new PopoverPositioner(trigger, content)
+			popover.setPosition(side, autoPosition)
 
-			const scrollTop = document.documentElement.scrollTop
-
-			content.style.top =
-				triggerPosition.top + scrollTop + triggerPosition.height + 'px'
-
-			content.style.left = triggerPosition.left + 'px'
-			content.style.width = trigger.clientWidth + 'px'
+			if (inheritWidth) popover.setWidth()
 		}
-	}, [isOpen])
+	}, [isOpen, side, inheritWidth, autoPosition, canOpen])
 
 	return (
 		<PopoverContext.Provider
@@ -102,9 +107,6 @@ export const PopoverTrigger = forwardRef(function PopoverTrigger(
 
 	return (
 		<div
-			onFocus={(event) => {
-				props?.onFocus?.(event)
-			}}
 			onClick={(event) => {
 				toggleMode ? onToggle() : onOpen()
 				props?.onClick?.(event)
@@ -126,37 +128,68 @@ export const PopoverContent = forwardRef(function PopoverContent(
 
 	if (!isOpen) return null
 
+	if (typeof canOpen === 'boolean' && !canOpen) return null
+
 	return createPortal(
 		<div {...props} ref={mergeRefs(ref, contentRef)} className={styles.content}>
-			{typeof canOpen === 'boolean' ? (
-				canOpen ? (
-					<div className={cn(styles.content__inner, props.className)}>
-						{props.children}
-					</div>
-				) : null
-			) : (
-				<div className={cn(styles.content__inner, props.className)}>
+			
+				<div className={cn(styles.content__inner,'my-4', props.className)}>
 					{props.children}
 				</div>
-			)}
 		</div>,
 		document.body
 	)
 })
 
-export const PopoverClose = forwardRef(function PopoverClose({asChild, ...props}:IPopoverCloseProps, ref: ForwardedRef<HTMLButtonElement>) {
-	
-		const {onClose} = usePopover()
-		const Comp = asChild ? Slot : "button"
-		return (
-		  <Comp
-			{...props}
-			onClick={(event) => {
-				props.onClick?.(event)
-				onClose()
-			}}
-			ref={ref}
-		  />
-		)
-	
+export const PopoverInput = forwardRef(function PopoverInput(
+	{ wrapperClassName, iconLeft, iconRight, ...props }: IPopoverInputProps,
+	ref: ForwardedRef<HTMLLabelElement>
+) {
+	const { onOpen, triggerRef } = usePopover()
+
+	const IconLeft = () => iconLeft
+	const IconRight = () => iconRight
+
+	return (
+		<label
+			ref={mergeRefs(ref, triggerRef)}
+			className={cn(styles.input__wrapper, wrapperClassName)}
+		>
+			<IconLeft />
+			<input
+				{...props}
+				className={cn(styles.input, props.className)}
+				onFocus={(event) => {
+					onOpen()
+					props.onFocus?.(event)
+				}}
+			/>
+			<IconRight />
+		</label>
+	)
 })
+
+export const PopoverClose = forwardRef<HTMLButtonElement, IPopoverCloseProps>(
+	function PopoverClose({ asChild, ...props }, ref) {
+		const Comp = asChild ? Slot : 'button'
+		const { onClose } = usePopover()
+		return (
+			<Comp
+				{...props}
+				onClick={(event) => {
+					props.onClick?.(event)
+					onClose()
+				}}
+				ref={ref}
+			/>
+		)
+	}
+)
+
+Popover.Trigger = PopoverTrigger
+Popover.Input = PopoverInput
+Popover.Content = PopoverContent
+Popover.Close = PopoverClose
+
+
+export  * from './Popover.types'
