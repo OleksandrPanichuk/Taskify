@@ -2,11 +2,11 @@ import {
 	ClerkProvider,
 	ModalProvider,
 	QueryProvider,
-	ThemeProvider
+	ThemeProvider,
+	Toaster
 } from '@/components/providers'
 
 import { PropsWithChildren } from 'react'
-import { Toaster } from 'sonner'
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -43,7 +43,7 @@ const PlatformLayout = ({ children }: PropsWithChildren) => {
 					<ClerkProvider>
 						<QueryProvider>
 							<ModalProvider />
-							<Toaster richColors />
+							<Toaster />
 							{children}
 						</QueryProvider>
 					</ClerkProvider>

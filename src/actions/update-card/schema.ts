@@ -10,6 +10,8 @@ export const UpdateCard = z.object({
       message: "Description is too short.",
     }),
   ),
+  startDate: z.optional(z.date()),
+  endDate: z.optional(z.date()),
   title: z.optional(
     z.string({
       required_error: "Title is required",

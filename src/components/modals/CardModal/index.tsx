@@ -2,18 +2,18 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { CardWithList } from '@/types'
-import { checkSubscription, fetcher } from '@/lib'
-import { AuditLog } from '@prisma/client'
 import { useCardModal } from '@/hooks'
+import { checkSubscription, fetcher } from '@/lib'
+import { CardWithList } from '@/types'
+import { AuditLog } from '@prisma/client'
 // import { Dialog, DialogContent } from "@/components/ui";
 import { Dialog, Transition } from '@headlessui/react'
-import { Header } from './Header'
-import { Description } from './Description'
+import { X } from 'lucide-react'
+import { Fragment } from 'react'
 import { Actions } from './Actions'
 import { Activity } from './Activity'
-import { Fragment } from 'react'
-import { X } from 'lucide-react'
+import { Description } from './Description'
+import { Header } from './Header'
 
 export const CardModal = () => {
 	const id = useCardModal((state) => state.id)
@@ -40,7 +40,7 @@ export const CardModal = () => {
 
 	return (
 		<Transition appear show={isOpen} as={Fragment}>
-			<Dialog as="div" className="relative z-50" onClose={onClose}>
+			<Dialog as="div" className="relative z-50 " onClose={onClose}>
 				<Transition.Child
 					as={Fragment}
 					enter="ease-out duration-300"
@@ -64,32 +64,32 @@ export const CardModal = () => {
 							leaveFrom="opacity-100 scale-100"
 							leaveTo="opacity-0 scale-95"
 						>
-							<Dialog.Panel className="w-full max-w-2xl h-[90%]  transform overflow-hidden rounded-2xl bg-white dark:bg-neutral-800 p-6 text-left align-middle shadow-xl transition-all">
+							<Dialog.Panel className="w-full max-w-2xl h-[90%]  transform overflow-auto rounded-2xl bg-white dark:bg-neutral-800 p-6 text-left align-middle shadow-xl transition-all">
 								<div className="flex items-start justify-between gap-x-2 w-full">
 									{!cardData ? <Header.Skeleton /> : <Header data={cardData} />}
 									<button onClick={onClose}>
 										<X className="h-4 w-4" />
 									</button>
 								</div>
-								<div className="grid grid-cols-1 md:grid-cols-4 md:gap-4">
-									<div className="col-span-3">
-										<div className="w-full space-y-6">
+								<div className="flex flex-col gap-4">
+									
+										<div className="w-full flex gap-4 flex-col md:flex-row space-y-6">
 											{!cardData ? (
 												<Description.Skeleton />
 											) : (
 												<Description data={cardData} isPro={isPro} />
 											)}
-											{!auditLogsData ? (
-												<Activity.Skeleton />
+											{!cardData ? (
+												<Actions.Skeleton />
 											) : (
-												<Activity items={auditLogsData} />
+												<Actions data={cardData} />
 											)}
-										</div>
+										
 									</div>
-									{!cardData ? (
-										<Actions.Skeleton />
+									{!auditLogsData ? (
+										<Activity.Skeleton />
 									) : (
-										<Actions data={cardData} />
+										<Activity items={auditLogsData} />
 									)}
 								</div>
 							</Dialog.Panel>

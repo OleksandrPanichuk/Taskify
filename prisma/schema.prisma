@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -45,6 +44,9 @@ model Card {
   title       String
   order       Int
   description String? @db.String
+
+  startDate DateTime?
+  endDate   DateTime?
 
   listId String @db.ObjectId
   list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)

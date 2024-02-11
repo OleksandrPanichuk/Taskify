@@ -7,6 +7,7 @@ import { useAction } from '@/hooks'
 import { updateListOrder } from '@/actions/update-list-order'
 import { toast } from 'sonner'
 import { updateCardOrder } from '@/actions/update-card-order'
+import { useListsStore } from '@/store'
 
 interface ListContainerProps {
 	data: ListWithCards[]
@@ -22,7 +23,8 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number) {
 }
 
 const ListContainer = ({ boardId, data }: ListContainerProps) => {
-	const [orderedData, setOrderedData] = useState(data)
+	// const [orderedData, setOrderedData] = useState(data)
+	const {orderedData, setOrderedData} = useListsStore()
 
 	const { execute: executeUpdateListOrder } = useAction(updateListOrder, {
 		onSuccess: () => {
