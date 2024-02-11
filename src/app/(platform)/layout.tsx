@@ -12,8 +12,7 @@ const PlatformLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<ThemeProvider
 			attribute="class"
-			defaultTheme="system"
-			enableSystem
+			defaultTheme="dark"
 			disableTransitionOnChange
 		>
 			<ClerkProvider>
