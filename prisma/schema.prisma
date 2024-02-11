@@ -39,11 +39,19 @@ model List {
   @@index([boardId])
 }
 
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
 model Card {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   order       Int
   description String? @db.String
+
+  priority Priority?
 
   startDate DateTime?
   endDate   DateTime?

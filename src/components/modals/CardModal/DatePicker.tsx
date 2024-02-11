@@ -26,8 +26,7 @@ export function DatePicker({ card }: { card: CardWithList }) {
 	const queryClient = useQueryClient()
 	const params = useParams()
 
-	const setOrderedData = useListsStore(s => s.setOrderedData)
-	const orderedData = useListsStore(s => s.orderedData)
+	const {orderedData, setOrderedData} = useListsStore()
 
 	const { execute } = useAction(updateCard, {
 		onSuccess: async (data) => {
@@ -51,8 +50,8 @@ export function DatePicker({ card }: { card: CardWithList }) {
 
 		execute({
 			id: card.id,
-			startDate: value?.from,
-			endDate: value?.to,
+			startDate: value?.from ?? null,
+			endDate: value?.to ?? null,
 			boardId: params.boardId as string
 		})
 	}
@@ -62,10 +61,9 @@ export function DatePicker({ card }: { card: CardWithList }) {
 				<Button
 					id="date"
 					variant={'gray'}
-					className={cn(
-						' justify-start w-full  text-left font-normal',
-						!date && 'text-muted-foreground'
-					)}
+					className={
+						' justify-start w-full  text-left font-normal'
+					}
 					size="inline"
 				>
 					<CalendarIcon className="h-4 w-4 mr-2 min-w-[1rem]" />

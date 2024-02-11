@@ -11,6 +11,7 @@ import { Button } from '@/components/ui'
 import { deleteCard } from '@/actions/delete-card'
 import { Skeleton } from '@/components/ui'
 import { DatePicker } from './DatePicker'
+import { PrioritySelect } from './PriotirySelect'
 
 interface ActionsProps {
 	data: CardWithList
@@ -66,8 +67,10 @@ export const Actions = ({ data }: ActionsProps) => {
 
 	return (
 		<div className="space-y-2 mt-2 md:max-w-[180px] w-full">
-			<p className="text-xs font-semibold">Actions</p>
+			<p className="text-xs font-semibold">Add to card</p>
 			<DatePicker card={data} />
+			<PrioritySelect card={data} />
+			<p className="text-xs font-semibold">Actions</p>
 			<Button
 				onClick={onCopy}
 				disabled={isLoadingCopy}

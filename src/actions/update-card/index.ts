@@ -19,8 +19,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  const { id, boardId,startDate, endDate, ...values } = data;
-  let card;
+  const { id, boardId, ...values } = data;
+  let card
 
   try {
     card = await db.card.update({
@@ -34,8 +34,6 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
       data: {
         ...values,
-        startDate: startDate ?? null,
-        endDate: endDate ?? null
       },
     });
 
