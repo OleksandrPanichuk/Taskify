@@ -1,18 +1,30 @@
-import { PropsWithChildren } from "react";
-import { Toaster } from "sonner";
-import { ClerkProvider } from "@clerk/nextjs";
-import { QueryProvider, ModalProvider } from "@/components/providers";
+import {
+	ClerkProvider,
+	ModalProvider,
+	QueryProvider,
+	ThemeProvider
+} from '@/components/providers'
+
+import { PropsWithChildren } from 'react'
+import { Toaster } from 'sonner'
 
 const PlatformLayout = ({ children }: PropsWithChildren) => {
-  return (
-    <ClerkProvider>
-      <QueryProvider>
-        <ModalProvider />
-        <Toaster richColors />
-        {children}
-      </QueryProvider>
-    </ClerkProvider>
-  );
-};
+	return (
+		<ThemeProvider
+			attribute="class"
+			defaultTheme="system"
+			enableSystem
+			disableTransitionOnChange
+		>
+			<ClerkProvider>
+				<QueryProvider>
+					<ModalProvider />
+					<Toaster richColors />
+					{children}
+				</QueryProvider>
+			</ClerkProvider>
+		</ThemeProvider>
+	)
+}
 
-export default PlatformLayout;
+export default PlatformLayout

@@ -64,7 +64,7 @@ export const CardModal = () => {
 							leaveFrom="opacity-100 scale-100"
 							leaveTo="opacity-0 scale-95"
 						>
-							<Dialog.Panel className="w-full max-w-2xl h-[90%]  transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+							<Dialog.Panel className="w-full max-w-2xl h-[90%]  transform overflow-hidden rounded-2xl bg-white dark:bg-neutral-800 p-6 text-left align-middle shadow-xl transition-all">
 								<div className="flex items-start justify-between gap-x-2 w-full">
 									{!cardData ? <Header.Skeleton /> : <Header data={cardData} />}
 									<button onClick={onClose}>

@@ -79,15 +79,74 @@ body,
 	}
 }
 
-.description-editor, 
+.description-editor,
 .description-editor-output {
-	@apply bg-neutral-200 py-3 rounded-md;
+	@apply bg-neutral-200 py-3 rounded-md dark:bg-background;
 	> div {
-		background-color: rgb(229, 229, 229) !important;
+		@apply bg-neutral-200 dark:bg-background;
 	}
 }
 
+.description-editor {
+	position: relative;
+}
 
-.mantine-y68mcm ._isEmpty_nstdf_297 ._inlineContent_nstdf_297:before, .mantine-y68mcm ._isFilter_nstdf_298 ._inlineContent_nstdf_297:before {
-	@apply text-zinc-500;	
+.mantine-y68mcm ._isEmpty_nstdf_297 ._inlineContent_nstdf_297:before,
+.mantine-y68mcm ._isFilter_nstdf_298 ._inlineContent_nstdf_297:before {
+	@apply text-zinc-500;
+}
+
+::-webkit-scrollbar {
+	width: 0px;
+}
+
+::-webkit-scrollbar-track {
+	display: none;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar:horizontal {
+	height: 8px;
+	width: 12px;
+}
+
+::-webkit-scrollbar-track:horizontal {
+	background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+	background-color: #3498db;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:horizontal:hover {
+	background-color: #2c3e50;
+}
+
+.ql-snow div.ql-tooltip {
+	left: 0 !important;
+	box-shadow: none !important;
+	> input {
+		background: white;
+	}
+}
+
+.richtextWrap {
+	position: 'relative';
+	:global(.ql-editor) {
+		blockquote,
+		div,
+		h1,
+		h2,
+		h3,
+		h4,
+		ol,
+		p,
+		ul {
+			color: '[theme:black, default:black]';
+		}
+	}
 }

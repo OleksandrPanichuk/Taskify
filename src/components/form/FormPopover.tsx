@@ -57,8 +57,10 @@ export const FormPopover = ({
 	return (
 		<Popover side={side} autoPosition={autoPosition}>
 			<PopoverTrigger>{children}</PopoverTrigger>
-			<PopoverContent className={cn('w-80   mx-2', contentClassName)}>
-				<div className="text-sm font-medium text-center text-neutral-600 pb-4">
+			<PopoverContent
+				className={cn(' w-[300px] dark:bg-neutral-900 ', contentClassName)}
+			>
+				<div className="text-sm font-medium text-center text-neutral-600 dark:text-neutral-100 pb-4">
 					Create board
 				</div>
 

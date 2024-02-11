@@ -1,74 +1,74 @@
 'use client'
-import { BlockNoteEditor, PartialBlock } from '@blocknote/core'
-import { BlockNoteView, useBlockNote } from '@blocknote/react'
-import '@blocknote/core/style.css'
 
+import { useMemo } from 'react'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.bubble.css'
+import 'react-quill/dist/quill.snow.css'
 interface EditorProps {
 	onChange: (content: string) => void
-	editable: boolean
 	initialContent: string | null
-	id: string
+
 }
 
 export const Editor = ({
-	editable,
 	onChange,
 	initialContent,
-	id
 }: EditorProps) => {
-	let content: PartialBlock[] = []
-	try {
-		content = initialContent
-			? (JSON.parse(initialContent) as PartialBlock[])
-			: []
-	} catch {
-		content = initialContent
-			? [{ content: initialContent, type: 'paragraph' }]
-			: []
-	}
-	const editor: BlockNoteEditor = useBlockNote({
-		editable,
-		initialContent: content,
-		onEditorContentChange: (editor) => {
-			onChange(JSON.stringify(editor.topLevelBlocks, null, 2))
-		}
-	})
+	const modules = useMemo(
+		() => ({
+			toolbar: {
+				container: [
+					[{ header: [1, 2, 3, 4, false] }],
+					['bold', 'italic', 'underline', 'blockquote'],
+					[{ color: [] }],
+					[
+						{ list: 'ordered' },
+						{ list: 'bullet' },
+						{ indent: '-1' },
+						{ indent: '+1' }
+					],
+					['link'],
+					['clean']
+				]
+			},
+			clipboard: {
+				matchVisual: true
+			}
+		}),
+		[]
+	)
+	const formats = [
+		'header',
+		'bold',
+		'italic',
+		'underline',
+		'strike',
+		'blockquote',
+		'list',
+		'bullet',
+		'indent',
+		'link',
+		'color',
+		'clean'
+	]
+
 	return (
-		<BlockNoteView
-			className="description-editor"
-			id={id}
-			editor={editor}
-			theme={'light'}
+		<div className={'richtextWrapper'}>
+			<ReactQuill
+			formats={formats}
+			onChange={onChange}
+			modules={modules}
+			defaultValue={initialContent ?? ''}
+			className="bg-zinc-100 text-black "
+			theme="snow"
 		/>
+		</div>
 	)
 }
 interface EditorOutputProps {
-	content: string | null
+	content: string
 }
 
-
 export const EditorOutput = ({ content }: EditorOutputProps) => {
-	try {
-		const editor = useBlockNote({
-			initialContent: content
-				? (JSON.parse(content) as PartialBlock[])
-				: undefined,
-			editable: false
-		})
-		
-		return (
-			<BlockNoteView
-				className="description-editor-output"
-				editor={editor}
-				theme={'light'}
-			/>
-		)
-	} catch {
-		
-		return (
-			<div className="min-h-[78px] bg-neutral-200 text-sm font-medium py-3 px-3.5 rounded-md">
-				{content}
-			</div>
-		)
-	}
+	return <ReactQuill theme={'bubble'} value={content} readOnly  />
 }
