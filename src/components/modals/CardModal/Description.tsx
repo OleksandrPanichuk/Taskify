@@ -94,7 +94,7 @@ export const Description = ({ data, isPro }: DescriptionProps) => {
 				<p className="font-semibold text-neutral-700 mb-2 dark:text-neutral-200">
 					Description
 				</p>
-				{isPro ? (
+				{!isPro ? (
 					isEditing ? (
 						<form action={onEditorChange} ref={formRef} className={'space-y-2'}>
 							<Editor

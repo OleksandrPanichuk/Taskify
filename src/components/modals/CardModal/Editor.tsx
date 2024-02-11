@@ -68,5 +68,5 @@ interface EditorOutputProps {
 }
 
 export const EditorOutput = ({ content }: EditorOutputProps) => {
-	return <ReactQuill theme={'bubble'} value={content} readOnly  />
+	return <ReactQuill className='bg-background rounded-md' theme={'bubble'} value={content} readOnly  />
 }
