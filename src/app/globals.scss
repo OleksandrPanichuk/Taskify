@@ -134,19 +134,3 @@ body,
 	}
 }
 
-.richtextWrap {
-	position: 'relative';
-	:global(.ql-editor) {
-		blockquote,
-		div,
-		h1,
-		h2,
-		h3,
-		h4,
-		ol,
-		p,
-		ul {
-			color: '[theme:black, default:black]';
-		}
-	}
-}

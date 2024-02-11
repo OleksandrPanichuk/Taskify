@@ -53,8 +53,7 @@ export const Editor = ({
 	]
 
 	return (
-		<div className={'richtextWrapper'}>
-			<ReactQuill
+		<ReactQuill
 			formats={formats}
 			onChange={onChange}
 			modules={modules}
@@ -62,7 +61,6 @@ export const Editor = ({
 			className="bg-zinc-100 text-black "
 			theme="snow"
 		/>
-		</div>
 	)
 }
 interface EditorOutputProps {
