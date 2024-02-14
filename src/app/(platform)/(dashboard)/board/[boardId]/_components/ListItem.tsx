@@ -37,7 +37,7 @@ export const ListItem = ({ data, index }: ListItemProps) => {
 				<li
 					{...provided.draggableProps}
 					ref={provided.innerRef}
-					className="shrink-0 h-full min-w-[300px] select-none"
+					className="shrink-0 h-full w-[300px] select-none"
 				>
 					<div
 						{...provided.dragHandleProps}
