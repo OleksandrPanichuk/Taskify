@@ -12,9 +12,10 @@ import { X } from 'lucide-react'
 import { Fragment } from 'react'
 import { Actions } from './Actions'
 import { Activity } from './Activity'
+import { ChecklistContainer } from './ChecklistContainer'
+import { CompletedCheckbox } from './CompletedCheckbox'
 import { Description } from './Description'
 import { Header } from './Header'
-import { CompletedCheckbox } from './CompletedCheckbox'
 
 export const CardModal = () => {
 	const id = useCardModal((state) => state.id)
@@ -73,20 +74,23 @@ export const CardModal = () => {
 									</button>
 								</div>
 								<div className="flex flex-col gap-4">
-										{cardData && <CompletedCheckbox data={cardData}  />}
-										<div className="w-full flex gap-4 flex-col md:flex-row space-y-6">
+									{cardData && <CompletedCheckbox data={cardData} />}
+									<div className="w-full flex gap-4 flex-col md:flex-row space-y-6">
+										<div className="w-full flex flex-col gap-4">
 											{!cardData ? (
 												<Description.Skeleton />
 											) : (
 												<Description data={cardData} isPro={isPro} />
 											)}
-											{!cardData ? (
-												<Actions.Skeleton />
-											) : (
-												<Actions data={cardData} />
-											)}
-										
+											{!!cardData && <ChecklistContainer data={cardData} />}
+										</div>
+										{!cardData ? (
+											<Actions.Skeleton />
+										) : (
+											<Actions data={cardData} />
+										)}
 									</div>
+									
 									{!auditLogsData ? (
 										<Activity.Skeleton />
 									) : (

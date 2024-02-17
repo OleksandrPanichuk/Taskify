@@ -12,7 +12,7 @@ import { FormSubmit, FormTextarea } from '@/components/form'
 import { Button, Skeleton } from '@/components/ui'
 import { useAction } from '@/hooks'
 import { CardWithList } from '@/types'
-import { useTheme } from 'next-themes'
+
 import { Editor, EditorOutput } from './Editor'
 
 interface DescriptionProps {

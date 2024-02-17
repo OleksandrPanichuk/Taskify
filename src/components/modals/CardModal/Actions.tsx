@@ -1,15 +1,15 @@
 'use client'
 
-import { toast } from 'sonner'
 import { Copy, Trash } from 'lucide-react'
 import { useParams } from 'next/navigation'
+import { toast } from 'sonner'
 
-import { CardWithList } from '@/types'
-import { useAction, useCardModal } from '@/hooks'
 import { copyCard } from '@/actions/copy-card'
-import { Button } from '@/components/ui'
 import { deleteCard } from '@/actions/delete-card'
-import { Skeleton } from '@/components/ui'
+import { Button, Skeleton } from '@/components/ui'
+import { useAction, useCardModal } from '@/hooks'
+import { CardWithList } from '@/types'
+import { CreateChecklistButton } from './CreateChecklistButton'
 import { DatePicker } from './DatePicker'
 import { PrioritySelect } from './PriotirySelect'
 
@@ -70,6 +70,7 @@ export const Actions = ({ data }: ActionsProps) => {
 			<p className="text-xs font-semibold">Add to card</p>
 			<DatePicker card={data} />
 			<PrioritySelect card={data} />
+			<CreateChecklistButton cardId={data.id} />
 			<p className="text-xs font-semibold">Actions</p>
 			<Button
 				onClick={onCopy}

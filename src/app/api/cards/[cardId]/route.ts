@@ -30,9 +30,15 @@ export async function GET(
             title: true,
           },
         },
+        checklist: {
+          select: {
+            id:true,
+            title:true,
+            items: true
+          }
+        }
       },
     });
-
     return NextResponse.json(card);
   } catch (error) {
     return new NextResponse("Internal Error", { status: 500 });

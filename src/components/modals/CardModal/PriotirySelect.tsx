@@ -80,7 +80,7 @@ export const PrioritySelect = ({ card }: { card: CardWithList }) => {
 						</>
 					)}
 				</Listbox.Button>
-				<Listbox.Options className="absolute top-[110%] rounded-md border bg-popover text-popover-foreground shadow-md w-[100px] px-1 py-2 space-y-2">
+				<Listbox.Options className="absolute top-[110%] z-[100] rounded-md border bg-popover text-popover-foreground shadow-md w-[100px] px-1 py-2 space-y-2">
 					{Object.entries(priorityMap).map(([key, value]) => (
 						<Listbox.Option key={key} value={key}>
 							<Badge
