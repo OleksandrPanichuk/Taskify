@@ -3,12 +3,12 @@
 import { deleteChecklist } from '@/actions/delete-checklist'
 import { updateChecklist } from '@/actions/update-checklist'
 import { FormInput } from '@/components/form'
-import { Button } from '@/components/ui'
+import { Button, Progress } from '@/components/ui'
 import { useAction } from '@/hooks'
 import { CardChecklist } from '@/types'
 import { useQueryClient } from '@tanstack/react-query'
 import { CheckSquare, Trash } from 'lucide-react'
-import { ElementRef, useRef } from 'react'
+import { ElementRef, useMemo, useRef } from 'react'
 import { toast } from 'sonner'
 import { ChecklistItem } from './ChecklistItem'
 import { CreateChecklistItemButton } from './CreateChecklistItemButton'
@@ -48,7 +48,7 @@ export const Checklist = ({
 					queryKey: ['card', cardId]
 				})
 
-				toast.success(`Checklist ${data.title} updated."`)
+				toast.success(`Checklist ${data.title} updated.`)
 			}
 		}
 	)
@@ -66,6 +66,13 @@ export const Checklist = ({
 		})
 	}
 
+	const progress = useMemo(() => {
+		const checkedItems = data.items.filter((item) => item.checked)
+
+		if (!data.items.length) return 0
+
+		return Math.floor((checkedItems.length / data.items.length) * 100)
+	}, [data.items])
 	return (
 		<>
 			<div className="flex items-center gap-3 w-full">
@@ -90,8 +97,12 @@ export const Checklist = ({
 					Delete
 				</Button>
 			</div>
+			<div className="w-full flex items-center gap-2">
+				<p className="text-sm">{progress}%</p>
+				<Progress value={progress} />
+			</div>
 			{!!data.items.length && (
-				<ul className="w-full pl-9 ">
+				<ul className="w-full">
 					{data.items.map((item) => (
 						<ChecklistItem item={item} cardId={cardId} key={item.id} />
 					))}

@@ -119,7 +119,7 @@ model Checklist {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
   card   Card   @relation(fields: [cardId], references: [id], onDelete: Cascade)
-  cardId String @unique @db.ObjectId
+  cardId String  @db.ObjectId
 
   title String
 

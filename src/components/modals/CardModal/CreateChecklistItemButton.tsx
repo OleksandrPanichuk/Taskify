@@ -82,7 +82,7 @@ export const CreateChecklistItemButton = ({
 			</div>
 		</form>
 	) : (
-		<Button onClick={() => setIsEditing(true)} size="inline">
+		<Button  className="md:ml-9 ml-4" onClick={() => setIsEditing(true)} size="inline">
 			Add an Item
 		</Button>
 	)
