@@ -62,6 +62,8 @@ model Card {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  completed Boolean? 
+
   @@index([listId])
 }
 

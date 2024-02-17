@@ -1,15 +1,15 @@
 
 export const priorityMap = {
 	LOW: {
-		variant: 'green',
+		variant: 'green-darker',
 		text:'Low'
 	},
 	MEDIUM: {
-		variant:'orange',
+		variant:'orange-darker',
 		text:'Medium'
 	},
 	HIGH: {
-		variant:'red',
+		variant:'red-darker',
 		text:'High'
 	}
 } as const

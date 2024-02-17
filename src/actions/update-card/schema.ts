@@ -23,4 +23,6 @@ export const UpdateCard = z.object({
     })
   ),
   id: z.string(),
+
+  completed: z.boolean().optional()
 });

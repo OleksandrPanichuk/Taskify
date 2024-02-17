@@ -19,7 +19,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  const { id, boardId, ...values } = data;
+  const { id, boardId,completed, ...values } = data;
   let card
 
   try {
@@ -34,6 +34,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
       data: {
         ...values,
+        completed: values.startDate !== null ? completed : null
       },
     });
 

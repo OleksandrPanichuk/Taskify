@@ -52,7 +52,8 @@ export function DatePicker({ card }: { card: CardWithList }) {
 			id: card.id,
 			startDate: value?.from ?? null,
 			endDate: value?.to ?? null,
-			boardId: params.boardId as string
+			boardId: params.boardId as string,
+			completed: value?.from ? card.completed ?? false : undefined
 		})
 	}
 	return (

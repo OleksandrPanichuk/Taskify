@@ -14,6 +14,7 @@ import { Actions } from './Actions'
 import { Activity } from './Activity'
 import { Description } from './Description'
 import { Header } from './Header'
+import { CompletedCheckbox } from './CompletedCheckbox'
 
 export const CardModal = () => {
 	const id = useCardModal((state) => state.id)
@@ -72,7 +73,7 @@ export const CardModal = () => {
 									</button>
 								</div>
 								<div className="flex flex-col gap-4">
-									
+										{cardData && <CompletedCheckbox data={cardData}  />}
 										<div className="w-full flex gap-4 flex-col md:flex-row space-y-6">
 											{!cardData ? (
 												<Description.Skeleton />
