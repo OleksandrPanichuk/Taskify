@@ -39,7 +39,7 @@ export const CreateChecklistButton = ({ cardId }: { cardId: string }) => {
 							Checklist
 						</Button>
 					</Popover.Button>
-					<Popover.Panel className="p-4 w-auto flex min-w-[17.5rem] flex-col gap-4 bg-background top-[110%] md:right-0 absolute rounded-md z-[10000] ">
+					<Popover.Panel className="p-4 w-auto flex min-w-[17.5rem] flex-col gap-4 bg-background top-[110%] md:right-0 absolute rounded-md z-[10000] shadow-md ">
 						<h3 className="text-center w-full">Add Checklist</h3>
 						<form
 							className="flex flex-col gap-2 items-start"

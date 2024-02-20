@@ -33,6 +33,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       }
     });
 
+    console.log('subscription', orgSubscription)
     if (orgSubscription && orgSubscription.stripeCustomerId) {
       const stripeSession = await stripe.billingPortal.sessions.create({
         customer: orgSubscription.stripeCustomerId,
@@ -71,7 +72,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
       url = stripeSession.url || "";
     }
-  } catch {
+  } catch (err) {
+    console.log(err)
     return {
       error: "Something went wrong!"
     }

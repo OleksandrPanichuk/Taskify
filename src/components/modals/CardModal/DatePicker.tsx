@@ -84,7 +84,7 @@ export function DatePicker({ card }: { card: CardWithList }) {
 					</span>
 				</Button>
 			</Popover.Button>
-			<Popover.Panel className="w-auto p-0 bg-background top-[110%] md:right-0 absolute rounded-md z-[10000] ">
+			<Popover.Panel className="w-auto p-0 bg-background shadow-md top-[110%] md:right-0 absolute rounded-md z-[10000] ">
 				<Calendar
 					initialFocus
 					mode="range"
