@@ -9,9 +9,8 @@ import { Button, Calendar } from '@/components/ui'
 
 import { updateCard } from '@/actions/update-card'
 import { useAction } from '@/hooks'
-import { cn } from '@/lib'
 import { CardWithList } from '@/types'
-import { Popover } from '@headlessui/react'
+import { Popover } from '@mantine/core'
 import { useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { toast } from 'sonner'
@@ -57,8 +56,8 @@ export function DatePicker({ card }: { card: CardWithList }) {
 		})
 	}
 	return (
-		<Popover className={'relative'}>
-			<Popover.Button as={'div'} className={'w-full'}>
+		<Popover position="bottom-end">
+			<Popover.Target>
 				<Button
 					id="date"
 					variant={'gray'}
@@ -83,8 +82,8 @@ export function DatePicker({ card }: { card: CardWithList }) {
 						)}
 					</span>
 				</Button>
-			</Popover.Button>
-			<Popover.Panel className="w-auto p-0 bg-background shadow-md top-[110%] md:right-0 absolute rounded-md z-[10000] ">
+			</Popover.Target>
+			<Popover.Dropdown className="w-auto p-0  shadow-md rounded-md ">
 				<Calendar
 					initialFocus
 					mode="range"
@@ -93,7 +92,7 @@ export function DatePicker({ card }: { card: CardWithList }) {
 					onSelect={onChange}
 					numberOfMonths={1}
 				/>
-			</Popover.Panel>
+			</Popover.Dropdown>
 		</Popover>
 	)
 }

@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { Plus } from "lucide-react";
-import { useLocalStorage } from "usehooks-ts";
 import { useOrganization, useOrganizationList } from "@clerk/nextjs";
 
-import { Button , Skeleton, Accordion} from "@/components/ui";
+import {useLocalStorage} from '@mantine/hooks'
+
+import { Button , Skeleton} from "@/components/ui";
 
 
 import { NavItem, Organization } from "./NavItem";
+import { Accordion } from "@mantine/core"
 
 interface SidebarProps {
   storageKey?: string;
@@ -18,8 +20,10 @@ export const Sidebar = ({
   storageKey = "t-sidebar-state",
 }: SidebarProps) => {
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
-    storageKey,
-    {}
+    {
+      key:storageKey,
+      defaultValue:{},
+    }
   );
 
   const {
@@ -88,9 +92,9 @@ export const Sidebar = ({
         </Button>
       </div>
       <Accordion
-        type="multiple"
         defaultValue={defaultAccordionValue}
         className="space-y-2"
+        multiple
       >
         {userMemberships.data.map(({ organization }) => (
           <NavItem

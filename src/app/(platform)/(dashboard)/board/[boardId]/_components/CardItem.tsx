@@ -6,12 +6,8 @@ import { Card } from '@prisma/client'
 import { Badge } from '@/components/ui'
 import { priorityMap } from '@/constants/priority'
 import { useCardModal } from '@/hooks'
-import { format } from 'date-fns'
 import { memo } from 'react'
-import { Check } from 'lucide-react'
-import { Hint } from '@/components'
 import { CardDateBadge } from '.'
-import { cn } from '@/lib'
 
 interface CardItemProps {
 	data: Card
@@ -32,7 +28,6 @@ export const CardItem = memo(({ data, index }: CardItemProps) => {
 					onClick={() => cardModal.onOpen(data.id)}
 					className=" border-2 border-transparent hover:border-black dark:hover:border-neutral-300 dark:bg-neutral-900 py-2 px-3  bg-white rounded-md shadow-sm"
 				>
-					
 					<div className="truncate text-sm">{data.title}</div>
 					{(!!data.priority || !!data.startDate) && (
 						<div className="flex items-center gap-1 mt-2 overflow-visible">

@@ -5,7 +5,7 @@ import { AlignLeft } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import { ElementRef, useRef, useState } from 'react'
 import { toast } from 'sonner'
-import { useEventListener, useOnClickOutside } from 'usehooks-ts'
+import {  useEventListener } from '@mantine/hooks'
 
 import { updateCard } from '@/actions/update-card'
 import { FormSubmit, FormTextarea } from '@/components/form'
@@ -27,7 +27,6 @@ export const Description = ({ data, isPro }: DescriptionProps) => {
 	const [isEditing, setIsEditing] = useState(false)
 	const [editorContent, setEditorContent] = useState<string>('')
 
-	const formRef = useRef<ElementRef<'form'>>(null)
 	const textareaRef = useRef<ElementRef<'textarea'>>(null)
 
 
@@ -49,7 +48,6 @@ export const Description = ({ data, isPro }: DescriptionProps) => {
 	}
 
 	useEventListener('keydown', onKeyDown)
-	useOnClickOutside(formRef, disableEditing)
 
 	const { execute, fieldErrors } = useAction(updateCard, {
 		onSuccess: async (data) => {
@@ -93,9 +91,9 @@ export const Description = ({ data, isPro }: DescriptionProps) => {
 				<p className="font-semibold text-neutral-700 mb-2 dark:text-neutral-200">
 					Description
 				</p>
-				{isPro ? (
+				{!isPro ? (
 					isEditing ? (
-						<form action={onEditorChange} ref={formRef} className={'space-y-2'}>
+						<form action={onEditorChange} className={'space-y-2'}>
 							<Editor
 								initialContent={data.description}
 								onChange={(content) => setEditorContent(content)}
@@ -125,7 +123,7 @@ export const Description = ({ data, isPro }: DescriptionProps) => {
 						</div>
 					)
 				) : isEditing ? (
-					<form action={onSubmit} ref={formRef} className="space-y-2">
+					<form action={onSubmit}  className="space-y-2">
 						<FormTextarea
 							id="description"
 							className="w-full mt-2"

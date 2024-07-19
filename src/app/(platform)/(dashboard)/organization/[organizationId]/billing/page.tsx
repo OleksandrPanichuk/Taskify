@@ -1,22 +1,20 @@
-import { checkSubscription } from "@/lib"
-import { Separator } from "@/components/ui";
+import { checkSubscription } from '@/lib'
 
-import {SubscriptionButton} from './_components'
+import { SubscriptionButton } from './_components'
 
-import { Info } from "../_components";
+import { Divider } from '@mantine/core'
+import { Info } from '../_components'
 
 const BillingPage = async () => {
-  const isPro = await checkSubscription();
+	const isPro = await checkSubscription()
 
-  return (
-    <div className="w-full">
-      <Info isPro={isPro} />
-      <Separator className="my-2" />
-      <SubscriptionButton
-        isPro={isPro}
-      />
-    </div>
-  );
-};
+	return (
+		<div className="w-full">
+			<Info isPro={isPro} />
+			<Divider className="my-2" />
+			<SubscriptionButton isPro={isPro} />
+		</div>
+	)
+}
 
-export default BillingPage;
+export default BillingPage

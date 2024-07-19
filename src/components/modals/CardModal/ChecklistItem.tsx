@@ -1,7 +1,8 @@
 import { deleteChecklistItem } from '@/actions/delete-checklist-item'
 import { updateChecklistItem } from '@/actions/update-checklist-item'
-import { Button, Checkbox } from '@/components/ui'
+import { Button } from '@/components/ui'
 import { useAction } from '@/hooks'
+import { Checkbox } from '@mantine/core'
 import { type ChecklistItem as ChecklistItemType } from '@prisma/client'
 import { useQueryClient } from '@tanstack/react-query'
 import { Trash } from 'lucide-react'
@@ -26,21 +27,30 @@ export const ChecklistItem = ({
 		}
 	)
 
-
-	const {execute: updChecklistItem, isLoading: isUpdating} = useAction(updateChecklistItem, {
-		onSuccess: async () => {
-			await queryClient.invalidateQueries({
-				queryKey: ['card', cardId]
-			})
+	const { execute: updChecklistItem, isLoading: isUpdating } = useAction(
+		updateChecklistItem,
+		{
+			onSuccess: async () => {
+				await queryClient.invalidateQueries({
+					queryKey: ['card', cardId]
+				})
+			}
 		}
-	})
+	)
 
 	return (
 		<li key={item.id} className="flex items-start break-all gap-2 w-full mb-1">
-			<Checkbox className='mt-1' onCheckedChange={checked => updChecklistItem({
-				id:item.id,
-				checked: Boolean(checked)
-			})} id={item.id} defaultChecked={item.checked} />
+			<Checkbox
+				className="mt-1"
+				onChange={(e) =>
+					updChecklistItem({
+						id: item.id,
+						checked: Boolean(e.currentTarget.checked)
+					})
+				}
+				id={item.id}
+				defaultChecked={item.checked}
+			/>
 			<label htmlFor={item.id} className="flex-1">
 				{item.text}
 			</label>

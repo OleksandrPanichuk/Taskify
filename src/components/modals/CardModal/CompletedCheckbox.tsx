@@ -1,9 +1,9 @@
 import { updateCard } from '@/actions/update-card'
-import { Badge, Checkbox } from '@/components/ui'
+import { Badge } from '@/components/ui'
 import { useAction } from '@/hooks'
 import { useListsStore } from '@/store'
 import { CardWithList } from '@/types'
-import { CheckedState } from '@radix-ui/react-checkbox'
+import { Checkbox } from '@mantine/core'
 import { useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { CheckSquare } from 'lucide-react'
@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 export const CompletedCheckbox = ({ data }: { data: CardWithList }) => {
-	const [checked, setChecked] = useState<CheckedState>(data.completed ?? false)
+	const [checked, setChecked] = useState<boolean>(data.completed ?? false)
 	const queryClient = useQueryClient()
 	const params = useParams()
 
@@ -58,15 +58,16 @@ export const CompletedCheckbox = ({ data }: { data: CardWithList }) => {
 				>
 					<Checkbox
 						checked={checked}
-						onCheckedChange={(e) => {
-							setChecked(e)
+						onChange={(e) => {
+							const checked = e.currentTarget.checked
+							setChecked(checked)
 							execute({
 								id: data.id,
 								startDate: data.startDate
 									? new Date(data.startDate)
 									: undefined,
 								boardId: params.boardId as string,
-								completed: Boolean(e)
+								completed: Boolean(checked)
 							})
 						}}
 					/>

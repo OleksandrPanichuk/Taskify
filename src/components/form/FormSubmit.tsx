@@ -3,20 +3,19 @@
 import { useFormStatus } from "react-dom";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui";
-
+import { Button, ButtonProps } from "@mantine/core"
 interface FormSubmitProps {
   children: React.ReactNode;
   disabled?: boolean;
   className?: string;
-  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "primary";
+  variant?: ButtonProps['variant']
 };
 
 export const FormSubmit = ({
   children,
   disabled,
   className,
-  variant = "primary"
+  variant = "filled"
 }: FormSubmitProps) => {
   const { pending } = useFormStatus();
 
@@ -26,7 +25,7 @@ export const FormSubmit = ({
       type="submit"
       variant={variant}
       size="sm"
-      className={cn(className)}
+      className={className}
     >
       {children}
     </Button>

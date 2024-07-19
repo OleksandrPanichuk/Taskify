@@ -9,7 +9,7 @@ import {
   KeyboardEventHandler,
 } from "react";
 import { useParams } from "next/navigation";
-import { useOnClickOutside, useEventListener } from "usehooks-ts";
+import { useClickOutside, useEventListener } from "@mantine/hooks";
 
 import { useAction } from "@/hooks/use-action";
 import { createCard } from "@/actions/create-card";
@@ -31,7 +31,8 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({
   isEditing,
 }, ref) => {
   const params = useParams();
-  const formRef = useRef<ElementRef<"form">>(null);
+ 
+  const formRef = useClickOutside(disableEditing);
 
   const { execute, fieldErrors } = useAction(createCard, {
     onSuccess: (data) => {
@@ -49,7 +50,6 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({
     }
   };
 
-  useOnClickOutside(formRef, disableEditing);
   useEventListener("keydown", onKeyDown);
 
   const onTextareakeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {

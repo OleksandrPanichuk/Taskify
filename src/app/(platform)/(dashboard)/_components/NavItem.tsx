@@ -1,17 +1,12 @@
 'use client'
 
-import { useRouter, usePathname } from 'next/navigation'
-import Image from 'next/image'
 import { Activity, CreditCard, Layout, Settings } from 'lucide-react'
+import Image from 'next/image'
+import { usePathname, useRouter } from 'next/navigation'
 
+import { Button, Skeleton } from '@/components/ui'
 import { cn } from '@/lib/utils'
-import {
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-	Button,
-	Skeleton
-} from '@/components/ui'
+import { Accordion } from '@mantine/core'
 
 export type Organization = {
 	id: string
@@ -64,13 +59,15 @@ export const NavItem = ({
 	}
 
 	return (
-		<AccordionItem value={organization.id} className="border-none">
-			<AccordionTrigger
+		<Accordion.Item value={organization.id} className="border-none">
+			<Accordion.Control
 				onClick={() => onExpand(organization.id)}
 				className={cn(
-					'flex items-center gap-x-2 p-1.5 text-neutral-700 dark:text-neutral-200 rounded-md hover:bg-neutral-500/10 transition text-start no-underline hover:no-underline',
-					isActive && !isExpanded && 'bg-sky-500/10 text-sky-700'
+					'flex items-center gap-x-2  text-neutral-200 rounded-md hover:bg-neutral-500/10 transition text-start no-underline hover:no-underline !p-1.5',
+					isActive && !isExpanded && 'bg-sky-500/10 '
 				)}
+				classNames={{label:"!py-0"}}
+				
 			>
 				<div className="flex items-center gap-x-2">
 					<div className="w-7 h-7 relative">
@@ -83,9 +80,9 @@ export const NavItem = ({
 					</div>
 					<span className="font-medium text-sm">{organization.name}</span>
 				</div>
-			</AccordionTrigger>
-			<AccordionContent className="pt-1 text-neutral-700">
-				{routes.map((route) => (
+			</Accordion.Control>
+			<Accordion.Panel classNames={{content:"!p-0"}} className="pt-1 text-neutral-700">
+				{routes.map((route) => (	
 					<Button
 						key={route.href}
 						size="sm"
@@ -100,8 +97,8 @@ export const NavItem = ({
 						{route.label}
 					</Button>
 				))}
-			</AccordionContent>
-		</AccordionItem>
+			</Accordion.Panel>
+		</Accordion.Item>
 	)
 }
 

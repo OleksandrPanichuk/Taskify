@@ -1,24 +1,23 @@
-import { Suspense } from "react";
+import { Suspense } from 'react'
 
-import { Separator } from "@/components/ui";
+import { Info } from '../_components'
 
-import { Info } from "../_components";
-
-import { ActivityList } from "./_components";
-import { checkSubscription } from "@/lib/subscription";
+import { checkSubscription } from '@/lib/subscription'
+import { Divider } from '@mantine/core'
+import { ActivityList } from './_components'
 
 const ActivityPage = async () => {
-  const isPro = await checkSubscription();
+	const isPro = await checkSubscription()
 
-  return (
-    <div className="w-full">
-      <Info isPro={isPro} />
-      <Separator className="my-2" />
-      <Suspense fallback={<ActivityList.Skeleton />}>
-        <ActivityList />
-      </Suspense>
-    </div>
-  );
-};
+	return (
+		<div className="w-full">
+			<Info isPro={isPro} />
+			<Divider className="my-2" />
+			<Suspense fallback={<ActivityList.Skeleton />}>
+				<ActivityList />
+			</Suspense>
+		</div>
+	)
+}
 
-export default ActivityPage;
+export default ActivityPage

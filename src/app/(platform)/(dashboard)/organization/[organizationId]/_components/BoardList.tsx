@@ -1,12 +1,12 @@
-import Link from 'next/link'
 import { auth } from '@clerk/nextjs'
-import { redirect } from 'next/navigation'
 import { HelpCircle, User2 } from 'lucide-react'
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 import { db } from '@/lib/db'
-import { Hint } from '@/components'
-import { Skeleton } from '@/components/ui'
+
 import { FormPopover } from '@/components/form'
+import { Skeleton } from '@/components/ui'
 import { MAX_FREE_BOARDS } from '@/constants/boards'
 import { checkSubscription, getAvailableCount } from '@/lib'
 
@@ -58,14 +58,14 @@ export const BoardList = async () => {
 								? 'Unlimited'
 								: `${MAX_FREE_BOARDS - availableCount} remaining`}
 						</span>
-						<Hint
-							sideOffset={40}
-							description={`
+						{/* <Tooltip
+							position='bottom'
+							label={`
                 Free Workspaces can have up to 5 open boards. For unlimited boards upgrade this workspace.
               `}
-						>
-							<HelpCircle className="absolute bottom-2 right-2 h-[14px] w-[14px]" />
-						</Hint>
+						> */}
+						<HelpCircle className="absolute bottom-2 right-2 h-[14px] w-[14px]" />
+						{/* </Tooltip> */}
 					</div>
 				</FormPopover>
 			</div>

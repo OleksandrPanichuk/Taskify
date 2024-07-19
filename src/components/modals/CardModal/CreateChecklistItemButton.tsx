@@ -6,9 +6,9 @@ import { useAction } from '@/hooks'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRef, useState } from 'react'
 import { toast } from 'sonner'
-import { useOnClickOutside } from 'usehooks-ts'
+import { useClickOutside } from '@mantine/hooks'
 
-export const CreateChecklistItemButton = ({
+export const CreateChecklistItemButton =  ({
 	cardId,
 	checklistId
 }: {
@@ -17,17 +17,17 @@ export const CreateChecklistItemButton = ({
 }) => {
 	const [isEditing, setIsEditing] = useState(false)
 	const [text, setText] = useState('')
-	const formRef = useRef<HTMLFormElement>(null)
 	const queryClient = useQueryClient()
-
+	
 	const cancel = () => {
 		if (isLoading) {
 			return
 		}
-
+		
 		setIsEditing(false)
 		setText('')
 	}
+	const formRef = useClickOutside(cancel, null)
 
 	const { execute, isLoading } = useAction(createChecklistItem, {
 		onSuccess: async () => {
@@ -38,8 +38,6 @@ export const CreateChecklistItemButton = ({
 		},
 		onError: () => toast.error('Failed to create checklist item.')
 	})
-
-	useOnClickOutside(formRef, cancel)
 
 	return isEditing ? (
 		<form

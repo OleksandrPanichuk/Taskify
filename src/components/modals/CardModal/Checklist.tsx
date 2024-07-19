@@ -3,9 +3,10 @@
 import { deleteChecklist } from '@/actions/delete-checklist'
 import { updateChecklist } from '@/actions/update-checklist'
 import { FormInput } from '@/components/form'
-import { Button, Progress } from '@/components/ui'
+import { Button } from '@/components/ui'
 import { useAction } from '@/hooks'
 import { CardChecklist } from '@/types'
+import { Progress } from '@mantine/core'
 import { useQueryClient } from '@tanstack/react-query'
 import { CheckSquare, Trash } from 'lucide-react'
 import { ElementRef, useMemo, useRef } from 'react'
@@ -57,13 +58,15 @@ export const Checklist = ({
 		const title = formData.get('title') as string
 
 		if (title === data.title) {
-			return
+			return ''
 		}
 
 		updChecklist({
 			title,
 			id: data.id
 		})
+
+		return ''
 	}
 
 	const progress = useMemo(() => {
@@ -73,6 +76,7 @@ export const Checklist = ({
 
 		return Math.floor((checkedItems.length / data.items.length) * 100)
 	}, [data.items])
+
 	return (
 		<>
 			<div className="flex items-center gap-3 w-full">
@@ -99,7 +103,7 @@ export const Checklist = ({
 			</div>
 			<div className="w-full flex items-center gap-2">
 				<p className="text-sm">{progress}%</p>
-				<Progress value={progress} />
+				<Progress color="white" value={progress} />
 			</div>
 			{!!data.items.length && (
 				<ul className="w-full">
