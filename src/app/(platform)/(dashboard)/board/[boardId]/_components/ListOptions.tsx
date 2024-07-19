@@ -38,16 +38,16 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
 		}
 	})
 
-	const onDelete = (formData: FormData) => {
-		const id = formData.get('id') as string
-		const boardId = formData.get('boardId') as string
+	const onDelete = () => {
+		const id = data.id
+		const boardId = data.boardId
 
 		executeDelete({ id, boardId })
 	}
 
-	const onCopy = (formData: FormData) => {
-		const id = formData.get('id') as string
-		const boardId = formData.get('boardId') as string
+	const onCopy = () => {
+		const id = data.id
+		const boardId = data.boardId
 
 		executeCopy({ id, boardId })
 	}
@@ -79,10 +79,8 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
 					<Plus className="h-4 w-4 mr-2" />
 					Add card...
 				</Button>
-				<form action={onCopy}>
-					<input hidden name="id" id="id" value={data.id} />
-					<input hidden name="boardId" id="boardId" value={data.boardId} />
 					<Button
+					onClick={onCopy}
 						variant="subtle"
 						color="gray"
 						className="rounded-none w-full h-auto p-2 px-5  font-normal text-sm flex"
@@ -90,12 +88,10 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
 						<Copy className="h-4 w-4 mr-2" />
 						Copy list...
 					</Button>
-				</form>
 				<Divider />
-				<form action={onDelete}>
-					<input hidden name="id" id="id" value={data.id} />
-					<input hidden name="boardId" id="boardId" value={data.boardId} />
+			
 					<Button
+					onClick={onDelete}
 						variant="subtle"
 						color="gray"
 						className="rounded-none w-full h-auto p-2 px-5  font-normal text-sm text-red-600 hover:text-red-700  flex"
@@ -103,7 +99,7 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
 						<Trash className="h-4 w-4 mr-2" />
 						Delete this list
 					</Button>
-				</form>
+			
 			</Popover.Dropdown>
 		</Popover>
 	)

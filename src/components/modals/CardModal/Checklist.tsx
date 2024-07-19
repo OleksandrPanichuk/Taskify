@@ -101,9 +101,9 @@ export const Checklist = ({
 					Delete
 				</Button>
 			</div>
-			<div className="w-full flex items-center gap-2">
-				<p className="text-sm">{progress}%</p>
-				<Progress color="white" value={progress} />
+			<div className="w-full flex items-center gap-2 ">
+				<p className="text-sm w-9">{progress}%</p>
+				<Progress color="white" className='w-full' value={progress} />
 			</div>
 			{!!data.items.length && (
 				<ul className="w-full">
