@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react'
 
 export const MantineProvider = ({ children }: PropsWithChildren) => {
 	return (
-		<MantineBaseProvider defaultColorScheme={'dark'}>
+		<MantineBaseProvider defaultColorScheme={'dark'} forceColorScheme="dark">
 			{children}
 		</MantineBaseProvider>
 	)

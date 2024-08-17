@@ -23,7 +23,6 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number) {
 }
 
 const ListContainer = ({ boardId, data }: ListContainerProps) => {
-	// const [orderedData, setOrderedData] = useState(data)
 	const {orderedData, setOrderedData} = useListsStore()
 
 	const { execute: executeUpdateListOrder } = useAction(updateListOrder, {

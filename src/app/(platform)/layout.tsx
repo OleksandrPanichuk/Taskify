@@ -36,21 +36,20 @@ export const metadata: Metadata = {
 
 const PlatformLayout = ({ children }: PropsWithChildren) => {
 	return (
-		<html suppressHydrationWarning lang="en" className='dark'>
+		<html suppressHydrationWarning lang="en" className="dark">
 			<head>
-				<ColorSchemeScript />
+				<ColorSchemeScript defaultColorScheme="dark" />
 			</head>
 			<body className={cn(inter.className)}>
-					<ClerkProvider>
-						<QueryProvider>
-							<MantineProvider>
-								<ModalProvider />
-								<Toaster />
-								{children}
-							</MantineProvider>
-						</QueryProvider>
-					</ClerkProvider>
-
+				<ClerkProvider>
+					<QueryProvider>
+						<MantineProvider>
+							<ModalProvider />
+							<Toaster />
+							{children}
+						</MantineProvider>
+					</QueryProvider>
+				</ClerkProvider>
 			</body>
 		</html>
 	)

@@ -14,7 +14,7 @@ interface BoardOptionsProps {
 }
 
 export const BoardOptions = ({ id }: BoardOptionsProps) => {
-	const [opened, {toggle, close}] = useDisclosure()
+	const [opened, { toggle, close }] = useDisclosure()
 	const { execute, isLoading } = useAction(deleteBoard, {
 		onError: (error) => {
 			toast.error(error)
@@ -28,16 +28,20 @@ export const BoardOptions = ({ id }: BoardOptionsProps) => {
 	return (
 		<Popover opened={opened} onClose={close} position="bottom-end">
 			<Popover.Target>
-				<Button onClick={toggle} className="h-auto w-auto p-2" variant="transparent">
+				<Button
+					onClick={toggle}
+					className="h-auto w-auto p-2"
+					variant="transparent"
+				>
 					<MoreHorizontal className="h-4 w-4" />
 				</Button>
 			</Popover.Target>
-			<Popover.Dropdown className=" pt-3 pb-3">
+			<Popover.Dropdown className=" p-2 pt-3">
 				<div className="text-sm font-medium text-center text-neutral-600 dark:text-neutral-200 pb-4">
 					Board actions
 				</div>
 				<Button
-				onClick={close}
+					onClick={close}
 					className="h-auto w-auto p-2 absolute top-2 right-2 text-neutral-600 "
 					variant="ghost"
 				>
@@ -48,7 +52,7 @@ export const BoardOptions = ({ id }: BoardOptionsProps) => {
 					variant="ghost"
 					onClick={onDelete}
 					disabled={isLoading}
-					className="  text-red-600   hover:text-red-700  transition-all rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm flex items-center gap-x-2"
+					className="  text-red-600   hover:text-red-700  transition-all rounded-md w-full h-auto py-2 px-5 justify-start font-normal text-sm flex items-center gap-x-2"
 				>
 					<Trash className="w-5 h-5" />
 					Delete this board

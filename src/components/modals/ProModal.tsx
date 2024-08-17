@@ -25,8 +25,18 @@ export const ProModal = () => {
 	}
 
 	return (
-		<Modal centered opened={isOpen} onClose={onClose}>
-			<div className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-neutral-900">
+		<Modal
+			centered
+			opened={isOpen}
+			onClose={onClose}
+			// withCloseButton={false}
+			classNames={{
+				body: 'p-0',
+				header: 'min-h-0 h-0 p-0',
+				close: 'absolute top-2 right-2 text-black hover:bg-zinc-100'
+			}}
+		>
+			<div>
 				<div className="aspect-video relative flex items-center justify-center">
 					<Image src="/hero.svg" alt="Hero" className="object-cover" fill />
 				</div>
@@ -38,11 +48,11 @@ export const ProModal = () => {
 						Explore the best of Taskify
 					</p>
 					<div className="pl-3">
-						<ul className="text-sm list-disc">
-							<li>Unlimited boards</li>
-							<li>Advanced checklists</li>
-							<li>Admin and security features</li>
-							<li>And more!</li>
+						<ul className="text-sm">
+							<li className="list-disc">Unlimited boards</li>
+							<li className="list-disc">Advanced checklists</li>
+							<li className="list-disc">Admin and security features</li>
+							<li className="list-disc">And more!</li>
 						</ul>
 					</div>
 					<Button

@@ -1,7 +1,7 @@
 'use client'
 
-import { ElementRef, useRef, useState } from 'react'
 import { Draggable, Droppable } from '@hello-pangea/dnd'
+import { ElementRef, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 import { ListWithCards } from '@/types'
@@ -50,7 +50,7 @@ export const ListItem = ({ data, index }: ListItemProps) => {
 									ref={provided.innerRef}
 									{...provided.droppableProps}
 									className={cn(
-										'mx-1 px-1 py-0.5 flex flex-col gap-y-2',
+										'mx-1 px-1 py-0.5 flex flex-col gap-y-2 max-h-[400px] overflow-auto',
 										data.cards.length > 0 ? 'mt-2' : 'mt-0'
 									)}
 								>
